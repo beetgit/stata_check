@@ -1,0 +1,37 @@
+eckrange -- checks if the variables are within the range of values
+    as specified
+
+
+Syntax
+
+    checkrange varlist, min(integer) max(integer) [missing(string)] [noexit]
+
+    options               Description
+    -------------------------------------------------------------------------
+    Main
+      min()             The min value of the variable
+      max()             The max value of the variable
+      missing           Characters considered as missing (eg. missing(.))
+                        Missing can take multiple characters separated by
+                        a space. Use missing(. .a) if . and .a are valid
+                        missing characters in your dataset.
+      noexit            Do not exit program if the range of variables are
+                        not within specified range.
+
+    -------------------------------------------------------------------------
+
+
+Description
+
+    checkrange checks to see if the variables are within the specified range.
+    This is good for checking survey data to ensure that the responses are
+    within a valid range. The default behavior is to exit the program when
+    there are ranges outside of the specified range. However, the program
+    will run through all of the varlist first before stopping. 
+
+Examples
+
+    . checkrange mpg rep98 rep78, min(0) max(1) noexit
+      Checks if there are 150observations and 150 variables. Do not exit
+      program even if that is not the case.
+

@@ -1,56 +1,25 @@
-
-Title
-
-    whatever -- Calculate whatever statistic
+eckobs -- checks for the number of observation and variables in
+    the dataset
 
 
 Syntax
 
-        whatever [varlist] [if] [in] [weight] [, options]
+        checkobs [number of observations expected] [, noexit vars()]
 
     options               Description
     -------------------------------------------------------------------------
     Main
-      detail              display additional statistics
-      meanonly            suppress the display; calculate only the mean;
-                            programmer's option
-      format              use variable's display format
-      separator(#)        draw separator line after every # variables;
-                            default is separator(5)
-      generate(newvar)    create variable name newvar
+      vars()            The expected number of variables
+      noexit            Do not exit program if the number of variables and/or
+                        observations is/are different from expected.
+
     -------------------------------------------------------------------------
-    by is allowed; see [D] by.
-    fweights are allowed; see weight.
 
 
 Description
 
-    whatever calculates the whatever statistic for the variables in varlist
-    when the data are not stratified.
-
-
-Options
-
-        +------+
-    ----+ Main +-------------------------------------------------------------
-
-    detail displays detailed output of the calculation.
-
-    meanonly restricts the calculation to be based on only the means.  The
-        default is to use a trimmed mean.
-
-    format requests that the summary statistics be displayed using the
-        display formats associated with the variables, rather than the
-        default g display format; see [U] 12.5 Formats: Controlling how data
-        are displayed.
-
-    separator(#) specifies how often to insert separation lines into the
-        output.  The default is separator(5), meaning that a line is drawn
-        after every 5 variables.  separator(10) would draw a line after every
-        10 variables.  separator(0) suppresses the separation line.
-
-    generate(newvar) creates newvar containing the whatever values.
-
+    checkobs checks for the number of observations and variables in
+    the dataset
 
 Remarks
 
@@ -59,6 +28,7 @@ Remarks
 
 Examples
 
-    . whatever mpg weight
+    . checkobs 150, vars(150) noexit
+      Checks if there are 150observations and 150 variables. Do not exit
+      program even if that is not the case.
 
-    . whatever mpg weight, meanonly

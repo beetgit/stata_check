@@ -1,0 +1,41 @@
+eckid -- checks for or displays the number of
+    unique IDs in the dataset.
+
+
+Syntax
+
+    checkid [no. of unique obs] , ID(string) [noexit]
+
+    options               Description
+    -------------------------------------------------------------------------
+    Main
+      ID()              The ID variable name.
+      noexit            Do not exit program if the number of variables and/or
+                        observations is/are different from expected.
+
+    -------------------------------------------------------------------------
+
+
+Description
+
+    checkid checks for the number of unique IDs there are in the dataset. If
+    no expected number of unique observations (by ID) is given, checkid
+    simply presents the number of unique IDs present in the dataset.
+
+    If a number is specified, the program will end, by default if the number
+    of unique IDs is different from the expected number. The noexit option
+    can be used if the user does not want the program to exit.
+
+Remarks
+
+    For detailed information on the whatever statistic, see [R] intro.
+
+
+Examples
+
+    . checkid 150, ID(name) noexit
+      Checks there are 150 unique entries in variable name. Do not exit
+      program if the numbers are different
+    . checkid, ID(name)
+      Check the number of unique IDs there are in the dataset. 
+
