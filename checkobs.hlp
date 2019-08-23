@@ -1,4 +1,6 @@
-eckobs -- checks for the number of observation and variables in
+Title
+
+    checkobs -- checks for the number of observation and variables in
     the dataset
 
 
@@ -20,10 +22,6 @@ Description
 
     checkobs checks for the number of observations and variables in
     the dataset
-
-Remarks
-
-    For detailed information on the whatever statistic, see [R] intro.
 
 
 Examples
