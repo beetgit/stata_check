@@ -1,4 +1,4 @@
-*! checkobs version 1.0.0  
+*! checkobs version 1.0.0
 program drop checkrange
 program define checkrange
 	version 15
@@ -19,18 +19,19 @@ program define checkrange
 			gen `missing' = 1 if `v' == `mis'
 		}
 		// Assert to check if in range or acceptable missing input
-		cap assert `v' >= `min' & `v' <= `max' & `missing' != 1
+		cap assert `v' >= `min' & `v' <= `max' | `missing' == 1
+		local error_here = 0
 			// if the assert fails
 			if _rc{
 				di as error "`v' is not in the ranges of `min' to `max'
 				if `noexit' == 1{
 					di as text "No exit option was chosen, program will continue on"
 				}
-				if `noexit' == 0 & `v' != ``varlist_length''{
+				if `noexit' == 0 & "`v'" != ``varlist_length''{
 					di as text "moving on to next var"
 					local error_here = 1
 				}
-				if `noexit' == 0 & `v' == ``varlist_length''{
+				if `noexit' == 0 & "`v'" == ``varlist_length''{
 					di as text "End of varlist reached"
 					exit
 				}
