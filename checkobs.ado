@@ -1,6 +1,4 @@
 *! version 1.0.0 20190821
-
-cap program drop checkobs
 program define checkobs
 	version 15
 	syntax [anything], [noexit] [VARS(integer 9000)]
@@ -38,4 +36,3 @@ program define checkobs
 		}
 	}
 end
-

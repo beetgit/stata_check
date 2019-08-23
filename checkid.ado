@@ -1,5 +1,4 @@
 *!checkobs version 1.0.0
-cap program drop checkid
 program define checkid
 	version 15
 	syntax [anything] , ID(string) [noexit] [case(string)] [gen(string)]
@@ -45,4 +44,3 @@ program define checkid
 		di as text "You must specify a case variable when using generate"
 		}
 end
-
