@@ -1,8 +1,8 @@
-*1 checkobs version 1.0.0 
+*!checkobs version 1.0.0
 cap program drop checkid
 program define checkid
 	version 15
-	syntax [anything] , ID(string) [noexit] [case(string)]
+	syntax [anything] , ID(string) [noexit] [case(string)] [gen(string)]
 	tempvar unique_ID
 	egen `unique_ID' = tag(`id')
 	qui count if `unique_ID' == 1
@@ -25,23 +25,24 @@ program define checkid
 		}
 	}
 	if "`anything'" == ""{
-		di as text "There are `no_of_ID' in this dataset."
+		di as text "There are `no_of_ID' unique ID(s) in this dataset."
 	}
-	
-	// For the case option 
+
+	// For the case option
 	if "`case'" != ""{
-		tempvar unique_id_case 
-		egen `unique_id_case' = tag(`id' `case')
+		tempvar unique_id_case
+		qui egen `unique_id_case' = tag(`id' `case')
 		tempvar number_of_cases
-		egen `number_of_cases' = total(`unique_id_case') 
-		replace `number_of_cases' = . if `unique_ID' != 1
-		di as text "Sum of the number of cases each ID has"  
+		qui bysort `id': egen `number_of_cases' = total(`unique_id_case')
+		qui replace `number_of_cases' = . if `unique_ID' != 1
+		di as text "Sum of the number of cases each ID has"
 		sum `number_of_cases'
-	} 
+	}
 	if "`case'" != "" & "`gen'" != ""{
-		gen `gen' = `number_of_cases' 
-	} 
+		gen `gen' = `number_of_cases'
+	}
 	if "`gen'" != "" & "`case'" == ""{
-		di as text "You must specify a case variable when using generate" 
-		} 
+		di as text "You must specify a case variable when using generate"
+		}
 end
+

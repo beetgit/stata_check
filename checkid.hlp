@@ -1,17 +1,24 @@
-eckid -- checks for or displays the number of
-    unique IDs in the dataset.
+Title
+
+    checkid -- checks for or displays the number of
+    unique IDs in the dataset. Can also list number
+    of obs per ID.
 
 
 Syntax
 
-    checkid [no. of unique obs] , ID(string) [noexit]
+    checkid [no. of unique obs] , id() [noexit] [case()] [gen()]
 
     options               Description
     -------------------------------------------------------------------------
     Main
-      ID()              The ID variable name.
+      id()              The ID variable name (required).
       noexit            Do not exit program if the number of variables and/or
                         observations is/are different from expected.
+      case()            The case variable, to count the number of unique
+                        cases per unique ID
+      gen()             Used with case to generate a variable showing the
+                        number of cases per unique ID. 
 
     -------------------------------------------------------------------------
 
@@ -26,6 +33,13 @@ Description
     of unique IDs is different from the expected number. The noexit option
     can be used if the user does not want the program to exit.
 
+    A second use, is that when *case* is specified, the program will sum the
+    number of unique *case* observations each ID has. This can be used with
+    the *gen* option to generate a new variable which has the number of
+    unique *case* each ID has, note that this new variable will have only
+    one value per ID, where there are more than one of each unique ID, only
+    one ID will have the number of cases, the rest will have missing values.
+
 Remarks
 
     For detailed information on the whatever statistic, see [R] intro.
@@ -37,5 +51,5 @@ Examples
       Checks there are 150 unique entries in variable name. Do not exit
       program if the numbers are different
     . checkid, ID(name)
-      Check the number of unique IDs there are in the dataset. 
-
+      Check the number of unique IDs there are in the dataset.
+ 
