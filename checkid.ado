@@ -1,7 +1,9 @@
-*!checkobs version 1.0.0
+*!checkobs version 1.1.0
+* Added in genall option
+	*!checkobs version 1.0.0
 program define checkid
 	version 15
-	syntax [anything] , ID(string) [noexit] [case(string)] [gen(string)]
+	syntax [anything] , ID(string) [noexit] [case(string)] [gen(string)] [genall] 
 	tempvar unique_ID
 	egen `unique_ID' = tag(`id')
 	qui count if `unique_ID' == 1
@@ -33,11 +35,11 @@ program define checkid
 		qui egen `unique_id_case' = tag(`id' `case')
 		tempvar number_of_cases
 		qui bysort `id': egen `number_of_cases' = total(`unique_id_case')
-		qui replace `number_of_cases' = . if `unique_ID' != 1
+		qui replace `number_of_cases' = . if `unique_ID' != 1 & "`genall'" == ""
 		di as text "Sum of the number of cases each ID has"
 		sum `number_of_cases'
 	}
-	if "`case'" != "" & "`gen'" != ""{
+	if "`case'" != "" & "`gen'" != "" {
 		gen `gen' = `number_of_cases'
 	}
 	if "`gen'" != "" & "`case'" == ""{
