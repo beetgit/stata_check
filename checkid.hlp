@@ -52,4 +52,7 @@ Examples
       program if the numbers are different
     . checkid, ID(name)
       Check the number of unique IDs there are in the dataset.
- 
+
+Scalars
+    
+    r(id)     The number of unique id in the dataset 

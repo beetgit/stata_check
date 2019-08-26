@@ -1,5 +1,7 @@
-*!checkobs version 1.0.0
-program define checkid
+*!checkobs version 1.0.1
+	* Added return class
+	*! checkobs version 1.0.0
+program define checkid, rclass
 	version 15
 	syntax [anything] , ID(string) [noexit] [case(string)] [gen(string)]
 	tempvar unique_ID
@@ -43,4 +45,8 @@ program define checkid
 	if "`gen'" != "" & "`case'" == ""{
 		di as text "You must specify a case variable when using generate"
 		}
+
+// return list
+return scalar id = `no_of_ID'
+
 end
