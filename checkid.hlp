@@ -7,7 +7,7 @@ Title
 
 Syntax
 
-    checkid [no. of unique obs] , id() [noexit] [case()] [gen()]
+    checkid [no. of unique obs] , id() [noexit] [case()] [gen()] [options]
 
     options               Description
     -------------------------------------------------------------------------
@@ -18,7 +18,12 @@ Syntax
       case()            The case variable, to count the number of unique
                         cases per unique ID
       gen()             Used with case to generate a variable showing the
-                        number of cases per unique ID. 
+                        number of cases per unique ID.
+      genall            The default is to generate the unique ID only for the
+                        first observation of the unique ID. Specifying *genall*
+                        will essentially repeat that number across all the
+                        unique IDs (similar to running a carryforward/backward)
+                        command.
 
     -------------------------------------------------------------------------
 
@@ -47,12 +52,17 @@ Remarks
 
 Examples
 
-    . checkid 150, ID(name) noexit
+    . checkid 150, id(name) noexit
       Checks there are 150 unique entries in variable name. Do not exit
       program if the numbers are different
-    . checkid, ID(name)
+    . checkid, id(name)
       Check the number of unique IDs there are in the dataset.
+    . checkid, id(patientID) case(CaseNo) gen(number_of_cases) genall
+      Generates a new variable number_of_cases that contains the number
+      of unique CaseNo in for the particular patientID. Where there are
+      multiple observations of patientID, the number_of_cases will be
+      repeated among all of such observations.
 
 Scalars
-    
-    r(id)     The number of unique id in the dataset 
+
+      r(id)     The number of unique id in the dataset
